@@ -1,0 +1,16 @@
+-- RECOVERED / SANITIZED lineage examples.
+-- Historical table names varied across project generations.
+
+Total Orders =
+COUNT('ExecOrders'[document_number])
+
+Cumulative Orders =
+CALCULATE(
+    [Total Orders],
+    FILTER(
+        ALLSELECTED('ExecOrders'[publication_date]),
+        'ExecOrders'[publication_date] <= MAX('ExecOrders'[publication_date])
+    )
+)
+
+Year = YEAR('ExecOrders'[publication_date])
